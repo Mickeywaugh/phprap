@@ -103,8 +103,8 @@ class mock {
 
         }
 
-        $integer = $this->number($rule);
-        $float   = $this->number($length);
+        $integer = $this->number($rule,'');
+        $float   = $this->number($length,'');
 
         return $integer . '.' . $float;
     }
