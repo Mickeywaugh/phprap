@@ -250,23 +250,26 @@
         });
 
         // 新增header参数
-        $(".js_addHeaderBtn").click(function (event) {
-            event.stopPropagation();
+        $(".js_addHeaderBtn").click(function (e) {
+            e=e||event;
+            e.stopPropagation();
             var trObj = $(".js_headerCloneBox").find('tr');
             $(this).closest('.panel').find('tbody').append(trObj.clone(true));
         });
 
         // 新增请求参数
-        $(".js_addRequestBtn").click(function (event) {
-            event.stopPropagation();
+        $(".js_addRequestBtn").click(function (e) {
+            e=e||event;
+            e.stopPropagation();
             var trObj = $(".js_requestCloneBox").find('tr');
             $(this).closest('.panel').find('tbody').append(trObj.clone(true));
         });
 
         // 删除参数
-        $("body").on('click', '.js_deleteBtn',function () {
+        $("body").on('click', '.js_deleteBtn',function (e) {
             // 阻止事件冒泡
-            event.stopPropagation();
+            e=e||event;
+            e.stopPropagation();
             $(this).closest('tr').remove();
         });
 
