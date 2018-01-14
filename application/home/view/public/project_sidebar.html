@@ -173,24 +173,28 @@
             submitBtn: '.js_submit'
         });
 
-        $(".js_moduleItem").mouseover(function(event){
-            event.stopPropagation();
+        $(".js_moduleItem").mouseover(function(e){
+            e=e||event;
+            e.stopPropagation();
             $(this).find('span').removeClass('hidden');
             $('.js_apiItem').find('span').addClass('hidden');
 
-        }).mouseout(function(event){
-            event.stopPropagation();
+        }).mouseout(function(e){
+            e=e||event;
+            e.stopPropagation();
             $(this).find('span').addClass('hidden');
 
         });
 
-        $(".js_apiItem").mouseover(function(event){
-            event.stopPropagation();
+        $(".js_apiItem").mouseover(function(e){
+            e=e||event;
+            e.stopPropagation();
             $(this).find('span').removeClass('hidden');
             $(this).find('.fa-eye').removeClass('hidden');
 
-        }).mouseout(function(event){
-            event.stopPropagation();
+        }).mouseout(function(e){
+            e=e||event;
+            e.stopPropagation();
             $(this).find('span').addClass('hidden');
             $(this).find('.fa-eye').addClass('hidden');
 
