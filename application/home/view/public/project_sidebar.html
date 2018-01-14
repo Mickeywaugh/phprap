@@ -117,7 +117,7 @@
                     </div>
                     <div class="form-group">
                         <input type="hidden" name="id" class="form-control">
-                        <input type="text" name='password' class="form-control" placeholder="重要操作，请输入登录密码" datatype="*" nullmsg="请输入登录密码!" errormsg="请输入正确的登录密码!">
+                        <input type="password" name='password' class="form-control" placeholder="重要操作，请输入登录密码" datatype="*" nullmsg="请输入登录密码!" errormsg="请输入正确的登录密码!">
                     </div>
 
                 </div>
@@ -150,9 +150,10 @@
         $("#js_deleteModuleModal form").validateForm();
 
         // 删除模块
-        $(".js_deleteModuleBtn").click(function () {
+        $(".js_deleteModuleBtn").click(function (e) {
             // 阻止事件冒泡
-            event.stopPropagation();
+            e=e||event;
+            e.stopPropagation();
             var id = $(this).data('id');
 
             if(id <= 0){
