@@ -25,7 +25,7 @@
 
                                 <div class="form-group">
                                     <label>登录密码</label>
-                                    <input class="form-control" placeholder="修改密码需要重新登录，密码不少于6位" name="password" type="text" ignore="ignore" datatype="*6-20" nullmsg="请输入登录密码！" errormsg="请填写6-20个字符">
+                                    <input class="form-control" placeholder="修改密码需要重新登录，密码不少于6位" name="password" type="password" ignore="ignore" datatype="*6-20" nullmsg="请输入登录密码！" errormsg="请填写6-20个字符">
                                 </div>
 
                             </div>
@@ -58,7 +58,7 @@
         }
 
         //退出登录
-        $(document).delegate('.js_logoutBtn', 'click',function(){
+        $('.js_logoutBtn').on('click',function(){
 
             var url = "{{url('logout','','','json')}}";
 
@@ -77,8 +77,9 @@
         });
 
         // 关闭单条消息
-        $(document).delegate('.js_cleanSingleNotify', 'click',function(event){
-            event.stopPropagation();
+        $('.js_cleanSingleNotify').on('click',function(e){
+            e=e||event;
+            e.stopPropagation();
 
             var thisObj = $(this);
 
@@ -110,7 +111,7 @@
         });
 
         // 清空全部消息
-        $(document).delegate('.js_cleanAllNotify', 'click',function(){
+        $('.js_cleanAllNotify').on('click',function(){
             confirm('确定要清空所有的提醒消息?', function(){
                 var ids = '';
                 $(".js_cleanSingleNotify").each(function () {
