@@ -735,16 +735,18 @@ class mock {
     /**
      * 随机图片
      */
-    public function image($size,$backgroup_color,$text, $text_color)
+        public function image()
     {
+        $args = func_get_args();
+        $width  = $this->number('100-500','');
+        $lenght = $this->number('200-400','');
 
-        $width  = $this->number('100-500');
-        $lenght = $this->number('200-400');
+        $size = $args[0] ? $args[0] : $width . 'x' . $lenght;
 
-        $size = $size ? $size : $width . 'x' . $lenght;
+        $backgroup_color = substr($args[1],1);
 
-        $backgroup_color = substr($backgroup_color,1);
-
+        $text=$args[2]?:false;
+        $text_color=$args[3]?:false;
         $url = "https://dummyimage.com/{$size}/";
 
         if($backgroup_color){
