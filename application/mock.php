@@ -45,6 +45,19 @@ class mock {
 
         }
 
+        if(false != strpos($rule,'_')){
+             list($strp, $strl) = explode('_', $rule);
+             $strp.='_';
+             $strl=is_numeric($strl)?$strl:mt_rand(8,16);
+            for ( $i = 0; $i < $strl; $i++ ){
+
+                $strp .= $value[mt_rand(0, strlen($value) - 1)];
+
+            }
+
+            return $strp;
+        }
+        
     }
 
     /**
