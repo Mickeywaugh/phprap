@@ -216,7 +216,7 @@ class api {
         $method[1] = 'GET';
         $method[2] = 'POST';
         $method[3] = 'PUT';
-
+        $method[4] = 'POST/GET';
         return $method_id ? $method[$method_id] : $method;
 
     }
