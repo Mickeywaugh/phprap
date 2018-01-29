@@ -94,7 +94,7 @@
                                 </div>
                                 <input type="text" class="form-control js_envUrl" name="api[url]" placeholder="请输入请求地址" value="{{$envs.0.url}}" />
                                 <div class="input-group-btn">
-                                    <button style="width: 80px;" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="js_methodName">{{$api.method}}</span> <span class="caret"></span></button>
+                                    <button style="width: 153px;" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="js_methodName">{{$api.method}}</span> <span class="caret"></span></button>
                                     <ul class="dropdown-menu">
                                         {{foreach $methods as $method}}
                                         <li class="js_methodItem"><a href="javascript:void(0);">{{$method}}</a></li>
@@ -121,9 +121,9 @@
                                             {{foreach $header_fields as $header_field}}
 
                                             <tr>
-                                                <td style="width:25%"> <input name="header[key][]" class="form-control js_selectHeaderBtn" placeholder="key" datatype="*" value="{{$header_field.name}}" /> </td>
+                                                <td style="width:25%"> <input name="header[key][]" class="form-control js_selectHeaderBtn" placeholder="key" datatype="*" value="{{$header_field.name}}" readonly /> </td>
                                                 <td style="width:40%"> <input name="header[value][]" class="form-control" placeholder="value" datatype="*"  value="{{$header_field.default_value}}" /> </td>
-                                                <td style="width:30%"> <input class="form-control" placeholder="description" value="{{$header_field.intro}}" /> </td>
+                                                <td style="width:30%"> <input class="form-control" placeholder="description" readonly value="{{$header_field.intro}}" /> </td>
                                                 <td style="width:5%">
                                                     <a href="javascript:void(0);" class="fa fa-trash-o js_deleteBtn" data-title="删除header参数" data-project_id="3"></a> </td>
                                             </tr>
@@ -155,9 +155,9 @@
                                             <tbody>
                                             {{foreach $request_fields as $request_field}}
                                             <tr>
-                                                <td style="width:25%"><input name="request[key][]" class="form-control" placeholder="key" datatype="*"  value="{{$request_field.name}}"/></td>
+                                                <td style="width:25%"><input name="request[key][]" class="form-control" placeholder="key" datatype="*" readonly value="{{$request_field.name}}"/></td>
                                                 <td style="width:40%"><input name="request[value][]" class="form-control" placeholder="value" datatype="*"  value="{{$request_field.default_value}}"/></td>
-                                                <td style="width:30%"><input class="form-control" placeholder="description" value="{{$request_field.title}}"/></td>
+                                                <td style="width:30%"><input class="form-control" placeholder="description" readonly value="{{$request_field.title}}"/></td>
                                                 <td style="width:5%">
                                                     <a href="javascript:void(0);" class="fa fa-trash-o js_deleteBtn" data-project_id="3"></a>
                                                 </td>
@@ -188,9 +188,9 @@
 <div class="hidden js_headerCloneBox">
     <table>
     <tr>
-        <td style="width:25%"><input name="header[key][]" class="form-control js_selectHeaderBtn" placeholder="key" datatype="*" value=""/></td>
+        <td style="width:25%"><input name="header[key][]" class="form-control js_selectHeaderBtn" placeholder="key" datatype="*" readonly value=""/></td>
         <td style="width:40%"><input name="header[value][]" class="form-control" placeholder="value" datatype="*" value=""/></td>
-        <td style="width:30%"><input class="form-control" placeholder="description" value=""/></td>
+        <td style="width:30%"><input class="form-control" readonly placeholder="description" value=""/></td>
         <td style="width:5%">
             <a href="javascript:void(0);" class="fa fa-trash-o js_deleteBtn" data-project_id="3"></a>
         </td>
@@ -201,9 +201,9 @@
 <div class="hidden js_requestCloneBox">
     <table>
         <tr>
-            <td style="width:25%"><input name="request[key][]" class="form-control" placeholder="key" datatype="*" value=""/></td>
-            <td style="width:40%"><input name="request[value][]" class="form-control" placeholder="value" datatype="*" value=""/></td>
-            <td style="width:30%"><input class="form-control" placeholder="description" value=""/></td>
+            <td style="width:25%"><input name="request[key][]" class="form-control" placeholder="key" datatype="*" readonly value=""/></td>
+            <td style="width:40%"><input name="request[value][]" class="form-control" placeholder="value" datatype="*" value="" /></td>
+            <td style="width:30%"><input class="form-control" placeholder="description" readonly value=""/></td>
             <td style="width:5%">
                 <a href="javascript:void(0);" class="fa fa-trash-o js_deleteBtn" data-project_id="3"></a>
             </td>
@@ -271,6 +271,10 @@
             e=e||event;
             e.stopPropagation();
             $(this).closest('tr').remove();
+        });
+        //双击字段可编辑
+        $(".form-control").dblclick(function(){
+            $(this).removeAttr("readonly");
         });
 
         //验证表单
