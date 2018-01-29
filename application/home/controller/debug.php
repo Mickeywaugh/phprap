@@ -29,6 +29,14 @@ class debug extends controller {
 
         }
 
+        if(strpos($api['method'],'/')){
+            
+            $methodList=explode('/', $api['method']);
+            
+            $method=$methodList[mt_rand(0,1)];
+            
+        }
+        
         $data = [];
         $header_data = [];
 
