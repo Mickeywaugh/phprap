@@ -46,9 +46,12 @@ class mock {
         }
 
         if(false != strpos($rule,'^')){
-             list($strp, $strl) = explode('^', $rule);
-             $strp.='^';
-             $strl=is_numeric($strl)?$strl:mt_rand(8,16);
+            list($strp, $strl) = explode('^', $rule);
+            
+            $strp.='^';
+            
+            $strl=is_numeric($strl)?$strl:mt_rand(8,16);
+            
             for ( $i = 0; $i < $strl; $i++ ){
 
                 $strp .= $value[mt_rand(0, strlen($value) - 1)];
