@@ -46,12 +46,13 @@ class mock {
         }
 
         if(false != strpos($rule,'^')){
+
             list($strp, $strl) = explode('^', $rule);
-            
+
             $strp.='^';
-            
-            $strl=is_numeric($strl)?$strl:mt_rand(8,16);
-            
+
+            $strl=is_numeric($strl)?$strl<17?:16:mt_rand(8,16);
+
             for ( $i = 0; $i < $strl; $i++ ){
 
                 $strp .= $value[mt_rand(0, strlen($value) - 1)];
@@ -60,7 +61,7 @@ class mock {
 
             return $strp;
         }
-        
+
     }
 
     /**
@@ -135,7 +136,7 @@ class mock {
 
         if(!isset($rule)){
 
-            $rule = $this->number('0-1');
+            $rule = $this->number('0-1','');
         }
 
         if(1 === $rule){
@@ -310,7 +311,7 @@ class mock {
      */
     public function price($rule, $decimal)
     {
-        $rule = $rule ? $rule : $this->number(1);
+        $rule = $rule ? $rule : $this->number(1,'');
         $decimal = $decimal ? $decimal : 2;
         return $this->float($rule, (int)$decimal);
 
@@ -408,7 +409,7 @@ class mock {
 
         $suffix = $data[array_rand($data, 1)];
 
-        return $protocol .'://' . $domain .'/'. $this->string('4-8') .'.'. $suffix;
+        return $protocol .'://' . $domain .'/'. $this->string('4-8','') .'.'. $suffix;
 
     }
 
@@ -427,11 +428,11 @@ class mock {
 
         if($domain == '@qq.com'){
 
-            return $this->number('10000-1000000000') . $domain;
+            return $this->number('10000-1000000000','') . $domain;
 
         }
 
-        return $this->string(6) . $domain;
+        return $this->string(6,'') . $domain;
 
     }
 
@@ -448,7 +449,7 @@ class mock {
 
         $prefix = $data[mt_rand(0, count($data) - 1)];
 
-        return $prefix . $this->number('10000000-99999999');
+        return $prefix . $this->number('10000000-99999999','');
 
     }
 
@@ -725,7 +726,7 @@ class mock {
      */
     public function zip()
     {
-        return $this->number('100000-860000');
+        return $this->number('100000-860000','');
     }
 
     /**
@@ -751,11 +752,12 @@ class mock {
     /**
      * 随机图片
      */
-        public function image()
+    public function image()
     {
         $args = func_get_args();
         $width  = $this->number('100-500','');
         $lenght = $this->number('200-400','');
+
 
         $size = $args[0] ? $args[0] : $width . 'x' . $lenght;
 
@@ -802,7 +804,7 @@ class mock {
             $message = '错误消息';
         }
 
-        return $message.$this->number('100-999');
+        return $message.$this->number('100-999','');
     }
 
     /**
@@ -1176,4 +1178,5 @@ class mock {
 
     }
 
+}
 }
