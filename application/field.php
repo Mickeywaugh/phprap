@@ -231,10 +231,10 @@ class field {
 
         }
 
-        // 检测字段名称是否已存在
+        // 检测字段名称在当前节点下是否已存在
         if(field::check_name(['api_id' => $api['id'],'parent_id'=>$api['parent_id'], 'name' => $name, 'method' => $method], $field_id)){
 
-            response::ajax(['code' => 305, 'msg' => '该参数名称已存在']);
+            response::ajax(['code' => 305, 'msg' => '该参数名称在当前节点下已存在']);
 
         }
 
