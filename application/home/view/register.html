@@ -26,7 +26,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="登录密码，不少于6位" name="password" type="password"  datatype="*6-20" nullmsg="请输入登录密码！" errormsg="请填写6-20个字符">
+                                    <input class="form-control" placeholder="登录密码，不少于6位" name="password" type="password" id="password_reg" datatype="*6-20" nullmsg="请输入登录密码！" errormsg="请填写6-20个字符">
 <!--                                    <span class="Validform_checktip"></span>-->
                                 </div>
 
@@ -95,10 +95,15 @@
 
             //验证注册表单
             $("#js_regForm").validateForm({
+                before:function(){
+                    var password=$("#password_reg").val();
+                    $("#password_reg").val($.md5(password));
+                },
                 success:function () {
                     window.location.href = "{{url('project/select')}}";
                 },
                 error:function () {
+                    $("#password_reg").val('');
                     reloadCode();
                 }
             });
