@@ -104,7 +104,7 @@
 <!-- 删除模块模态框 -->
 <div class="modal fade" id="js_deleteModuleModal" tabindex="2" role="dialog">
     <div class="modal-dialog" role="document">
-        <form role="form" action="{{url('module/delete','','','json')}}" method="post">
+        <form role="form" id="js_deleteModuleForm" action="{{url('module/delete','','','json')}}" method="post">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -117,7 +117,11 @@
                     </div>
                     <div class="form-group">
                         <input type="hidden" name="id" class="form-control">
+<<<<<<< HEAD
+                        <input type="password" name='password' id="password_delmodle" class="form-control" placeholder="重要操作，请输入登录密码" datatype="*" nullmsg="请输入登录密码!" errormsg="请输入正确的登录密码!">
+=======
                         <input type="password" name='password' class="form-control" placeholder="重要操作，请输入登录密码" datatype="*" nullmsg="请输入登录密码!" errormsg="请输入正确的登录密码!">
+>>>>>>> c22c3137d3bd08ea215e11a005624bc075d83d1c
                     </div>
 
                 </div>
@@ -147,7 +151,15 @@
         });
 
         //删除模块表单合法性验证
-        $("#js_deleteModuleModal form").validateForm();
+        $("#js_deleteModuleForm").validateForm({
+            before:function(){
+                var pswdObj=$("#password_delmodle");
+                    pswdObj.val($.md5(pswdObj.val()));
+            },
+            error:function(){
+                $("#password_delmodle").val('');
+            }
+            });
 
         // 删除模块
         $(".js_deleteModuleBtn").click(function (e) {
