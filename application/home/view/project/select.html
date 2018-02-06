@@ -205,7 +205,7 @@
 <!-- 删除项目模态框 -->
 <div class="modal fade" id="js_deleteProjectModal" tabindex="2" role="dialog">
     <div class="modal-dialog" role="document">
-        <form role="form" action="{{url('project/delete','','','json')}}" method="post">
+        <form role="form" id="js_deleteProjectForm" action="{{url('project/delete','','','json')}}" method="post">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -218,7 +218,7 @@
                     </div>
                     <div class="form-group">
                         <input name="id" type="hidden" class="form-control">
-                        <input name="password" type="text" class="form-control" placeholder="重要操作，请输入登录密码" datatype="*" nullmsg="请输入登录密码!" errormsg="请输入正确的登录密码!">
+                        <input id="password_delproject" name="password" type="password" class="form-control" placeholder="重要操作，请输入登录密码" datatype="*" nullmsg="请输入登录密码!" errormsg="请输入正确的登录密码!">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -298,17 +298,18 @@
         });
 
         //查看项目
-        $(".js_viewProject").click(function (event) {
-
-            event.stopPropagation();
+        $(".js_viewProject").click(function (e) {
+            e=e||event;
+            e.stopPropagation();
             window.location.href = $(this).data('url');
 
         });
 
         //退出项目
-        $(".js_quitProject").click(function(event){
+        $(".js_quitProject").click(function(e){
             // 阻止事件冒泡
-            event.stopPropagation();
+            e=e||event;
+            e.stopPropagation();
             var thisObj = $(this);
             var id = thisObj.data('id');
             var url = "{{url('project/quit')}}";
@@ -336,12 +337,21 @@
         });
 
         //删除项目表单合法性验证
-        $("#js_deleteProjectModal form").validateForm();
+        $("#js_deleteProjectForm").validateForm({
+            before:function(){
+                var pswdObj=$("#password_delproject");
+                    pswdObj.val($.md5(pswdObj.val()));
+            },
+            error:function(){
+                $("#password_delproject").val('');
+            }
+           });
 
         //删除项目
-        $('.js_deleteProjectBtn').click(function(event){
+        $('.js_deleteProjectBtn').click(function(e){
             // 阻止事件冒泡
-            event.stopPropagation();
+            e=e||event;
+            e.stopPropagation();
 
             var id = $(this).data('id');
 
