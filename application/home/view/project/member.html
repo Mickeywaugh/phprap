@@ -136,9 +136,10 @@
         });
 
         //移除成功
-        $(".js_quitProjectBtn").click(function(event){
+        $(".js_quitProjectBtn").click(function(e){
             // 阻止事件冒泡
-            event.stopPropagation();
+            e=e||event;
+            e.stopPropagation();
 
             var thisObj = $(this);
 
