@@ -27,7 +27,7 @@
 
             <div class="form-group">
                 <label for="recipient-name" class="control-label">登录密码:</label>
-                <input type="text" class="form-control" name="password" value="" placeholder="重要操作，请输入登录密码" datatype="*" nullmsg="请输入登录密码!">
+                <input type="password" class="form-control" name="password" id="password_trsf" value="" placeholder="重要操作，请输入登录密码" datatype="*" nullmsg="请输入登录密码!">
             </div>
 
             <div class="form-group">
@@ -63,14 +63,18 @@
         $("#js_transferProjectForm").validateForm({
             submitBtn: '#js_submit',
             before:function () {
+                var pswdObj=$("#password_trsf");
+                    pswdObj.val($.md5(pswdObj.val()));
                 // iframe父级提交按钮禁用
                 projectModal.find(".js_submit").attr("disabled", "disabled").text('提交中..');
+
             },
             success:function () {
                 parent.location.reload();
             },
             error:function () {
                 // iframe父级提交按钮激活
+                $("#password_trsf").val('');
                 projectModal.find(".js_submit").text('重新提交').removeAttr("disabled");
 
             }
