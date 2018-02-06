@@ -171,9 +171,10 @@
         });
 
         // 添加/编辑成员
-        $('.js_addMemberBtn').click(function(event){
+        $('.js_addMemberBtn').click(function(e){
             // 阻止事件冒泡
-            event.stopPropagation();
+            e=e||event;
+            e.stopPropagation();
 
             var id = $(this).data('id');
 
@@ -218,9 +219,10 @@
         });
 
         //移出项目
-        $(".js_quitProjectBtn").click(function(event){
+        $(".js_quitProjectBtn").click(function(e){
             // 阻止事件冒泡
-            event.stopPropagation();
+            e=e||event;
+            e.stopPropagation();
 
             var thisObj = $(this);
 
