@@ -276,9 +276,10 @@
         });
 
         //删除字段
-        $(document).delegate('.js_deleteFieldBtn', 'click',function(event){
+        $(document).delegate('.js_deleteFieldBtn', 'click',function(e){
             // 阻止事件冒泡
-            event.stopPropagation();
+            e=e||event;
+            e.stopPropagation();
             var thisObj = $(this);
 
             var id = $(this).data('id');
