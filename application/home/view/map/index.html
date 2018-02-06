@@ -220,7 +220,7 @@
                     </div>
                     <div class="form-group">
                         <input type="hidden" name="id" class="form-control">
-                        <input type="text" name='password' class="form-control" placeholder="重要操作，请输入登录密码" datatype="*" nullmsg="请输入登录密码!" errormsg="请输入正确的登录密码!">
+                        <input type="password" name='password' class="form-control" id="password_DelMap" placeholder="重要操作，请输入登录密码" datatype="*" nullmsg="请输入登录密码!" errormsg="请输入正确的登录密码!">
                     </div>
 
                 </div>
@@ -285,7 +285,7 @@
     $(function(){
 
         // 导入数据字典
-        $(document).delegate('.js_importMapBtn', 'click',function(){
+        $('.js_importMapBtn').on('click',function(){
 
             $('#js_importMapModal').modal('show');
 
@@ -296,14 +296,14 @@
         });
 
         // 修改数据字典
-        $(document).delegate('.js_editMapBtn', 'click',function(){
+        $('.js_editMapBtn').on('click',function(){
             alert('下个版本即将支持，敬请期待', 2000);return;
             var id = $(this).data('id');
             $('#page-wrapper').load("{{url('map/edit')}}", {'id':id});
         });
 
         // 删除数据字典
-        $(document).delegate('.js_deleteMapBtn', 'click',function(){
+        $('.js_deleteMapBtn').on('click',function(){
             var id = $(this).data('id');
 
             if(id <= 0){
@@ -316,10 +316,18 @@
         });
 
         //删除数据字典表单合法性验证
-        $("#js_deleteMapForm").validateForm({
+        $("#js_deleteMapForm").validateForm(
+        {
+            before:function(){
+                var pswdObj=$("#password_DelMap");
+                    pswdObj.val($.md5(pswdObj.val()));
+            },
             success:function () {
                 parent.location.reload();
             },
+            error:function(){
+                $("#password_DelMap").val();
+            }
         });
 
     });
