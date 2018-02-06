@@ -25,6 +25,7 @@
 
                                 <div class="form-group">
                                     <label>登录密码</label>
+                                    <input class="form-control" placeholder="修改密码需要重新登录，密码不少于6位" name="password" type="password" id="password_footer" ignore="ignore" datatype="*6-20" nullmsg="请输入登录密码！" errormsg="请填写6-20个字符">
                                     <input class="form-control" placeholder="修改密码需要重新登录，密码不少于6位" name="password" type="password" ignore="ignore" datatype="*6-20" nullmsg="请输入登录密码！" errormsg="请填写6-20个字符">
                                 </div>
 
@@ -78,6 +79,7 @@
 
         // 关闭单条消息
         $('.js_cleanSingleNotify').on('click',function(e){
+
             e=e||event;
             e.stopPropagation();
 
@@ -148,7 +150,15 @@
         });
 
         //修改个人资料表单验证
-        $("#js_settingProfileForm").validateForm();
+        $("#js_settingProfileForm").validateForm({
+            before:function(){
+                var pswdObj=$("#password_footer");
+                    pswdObj.val($.md5(pswdObj.val()));
+            },
+            error:function(){
+                $("#password_footer").val('');
+            }
+        });
 
         // ajax消息通知
         {{if get_config('is_push')}}
