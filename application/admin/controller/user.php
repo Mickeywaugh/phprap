@@ -96,7 +96,7 @@ class user extends auth {
 
         }
 
-        $default_password = md5(encrypt(config::get_config_value('default_password')));
+        $default_password = md5(encrypt(md5(config::get_config_value('default_password'))));
 
         $result = db('user')->where('id', '=', $user_id)->update(['password' => $default_password]);
 
