@@ -132,9 +132,10 @@
         });
 
         //删除环境
-        $("body").on('click', '.js_deleteEnvBtn',function () {
+        $("body").on('click', '.js_deleteEnvBtn',function (e) {
             // 阻止事件冒泡
-            event.stopPropagation();
+            e=e||event;
+            e.stopPropagation();
 
             if($('.js_deleteEnvBtn').length <= 1){
                 alert('至少要保留一个环境域名', 1000);
