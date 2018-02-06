@@ -18,7 +18,7 @@
                                     <input class="form-control" placeholder="登录邮箱" name="email" type="email"  autocomplete="off" datatype="e" nullmsg="请输入登录邮箱！" errormsg="请输入合法的邮箱地址！">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="登录密码" name="password" type="password" value="" autocomplete="off" datatype="*6-20" nullmsg="请填写登录密码！" errormsg="请填写6-20个字符">
+                                    <input class="form-control" placeholder="登录密码" id="password_login" name="password" type="password" value="" autocomplete="off" datatype="*6-20" nullmsg="请填写登录密码！" errormsg="请填写6-20个字符">
                                 </div>
                                 {{if $login_captcha}}
                                 <div class="form-group">
@@ -28,7 +28,7 @@
 
                                         <a class="input-group-btn verify-code">
 
-                                            <img alt="点击刷新" title="点击刷新" onclick="reloadCode()" src="{{url('login/code')}}">
+                                            <img alt="点击刷新" title="点击刷新" onclick="javascript:reloadCode()" src="{{url('login/code')}}">
 
                                         </a>
 
@@ -77,20 +77,24 @@
         $(function(){
 
             //验证登录表单
-            $("#js_loginForm").validateForm({
+            $("#js_loginForm").validateForm(
+            {
+                before:function(){
+                    var pswdObj=$("#password_login");
+                        pswdObj.val($.md5(pswdObj.val()));
+                },
                 success:function () {
                     window.location.href = "{{url('project/select')}}";
                 },
                 error:function () {
+                    $("#password_login").val();
                     reloadCode();
                 }
             });
 
             //enter回车登录
-            $('.js_loginForm').enterSubmit();
-
-        })
-
+            $('#js_loginForm').enterSubmit();
+        });
     </script>
 
     {{include_file name='public/footer'}}
