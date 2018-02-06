@@ -121,7 +121,7 @@
                                 <tr class="{{$header_field.class}}">
                                     <td>{{$header_field.name}}</td>
                                     <td>{{$header_field.default_value}}</td>
-                                    <td>{{$header_field.intro}}</td>
+                                    <td style="text-align: left;padding-left: 20px;">{{$header_field.intro}}</td>
                                 </tr>
                                 {{/foreach}}
 
@@ -165,7 +165,7 @@
                                     <td>{{\app\field::get_type_list({{$request_field.type}})}}</td>
                                     <td>{{if $request_field.is_required}}是{{else}}否{{/if}}</td>
                                     <td>{{$request_field.default_value}}</td>
-                                    <td>{{$request_field.intro}}</td>
+                                    <td style="text-align: left;padding-left: 20px;">{{$request_field.intro}}</td>
                                 </tr>
                                 {{/foreach}}
 
@@ -207,7 +207,7 @@
                                     <td>{{$response_field.title}}</td>
                                     <td>{{\app\field::get_type_list({{$response_field.type}})}}</td>
                                     <td>{{$response_field.mock}}</td>
-                                    <td>{{$response_field.intro}}</td>
+                                    <td style="text-align: left;padding-left: 20px;">{{$response_field.intro}}</td>
                                 </tr>
 
                                 {{/foreach}}
@@ -247,7 +247,7 @@
                         </div>
                         <div class="form-group">
                             <input type="hidden" name="id" class="form-control">
-                            <input type="text" name='password' class="form-control" placeholder="重要操作，请输入登录密码" datatype="*" nullmsg="请输入登录密码!" errormsg="请输入正确的登录密码!">
+                            <input type="password" name='password' id="password_DelApi" class="form-control" placeholder="重要操作，请输入登录密码" datatype="*" nullmsg="请输入登录密码!" errormsg="请输入正确的登录密码!">
                         </div>
 
                     </div>
@@ -265,17 +265,23 @@
 
 <script>
     $(function () {
-
         //删除接口表单合法性验证
         $("#js_deleteApiForm").validateForm({
+            before:function(){
+                var pswdObj=$("#password_DelApi");
+                    pswdObj.val($.md5(pswdObj.val()));
+            },
             success:function () {
                 window.location.href = "{{url("project/{{$project.encode_id}}")}}";
                 //parent.location.reload();
             },
+            error:function(){
+                $("#password_DelApi").val('');
+            }
         });
 
         // 删除接口
-        $(document).delegate('.js_deleteApiBtn', 'click',function(){
+        $('.js_deleteApiBtn').on('click',function(){
             var id = $(this).data('id');
 
             if(id <= 0){
@@ -288,7 +294,7 @@
         });
 
         // 修改接口
-        $(document).delegate('.js_editApiBtn', 'click',function(){
+        $('.js_editApiBtn').on('click',function(){
             var id = $(this).data('id');
             $('#page-wrapper').load("{{url('api/edit')}}", {'id':id});
         });
@@ -304,9 +310,10 @@
         });
 
         //刷新数据
-        $(document).delegate('.js_refreshField', 'click',function(event){
+        $('.js_refreshField').on('click',function(e){
             // 阻止事件冒泡
-            event.stopPropagation();
+            e=e||event;
+            e.stopPropagation();
 
             var thisObj = $(this);
 
