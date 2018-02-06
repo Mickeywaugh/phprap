@@ -169,9 +169,10 @@
         $("#js_addApiForm").validateForm();
 
         //删除字段
-        $(document).delegate('.js_deleteFieldBtn', 'click',function(event){
+        $(document).delegate('.js_deleteFieldBtn', 'click',function(e){
             // 阻止事件冒泡
-            event.stopPropagation();
+            e=e||event;
+            e.stopPropagation();
 
             var thisObj = $(this);
 
@@ -183,9 +184,10 @@
         });
 
         //添加数据表
-        $('.js_addTableBtn').click(function(event){
+        $('.js_addTableBtn').click(function(e){
             // 阻止事件冒泡
-            event.stopPropagation();
+            e=e||event;
+            e.stopPropagation();
 
             var name = $(this).data('name');
             var comment = $(this).data('comment');
@@ -207,9 +209,10 @@
 
 
         //删除数据表
-        $(document).delegate('.js_deleteTableBtn', 'click',function(event){
+        $(document).delegate('.js_deleteTableBtn', 'click',function(e){
             // 阻止事件冒泡
-            event.stopPropagation();
+            e=e||event;
+            e.stopPropagation();
 
             var thisObj = $(this);
 
