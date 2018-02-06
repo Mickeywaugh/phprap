@@ -122,7 +122,7 @@
 
                                             <tr>
                                                 <td style="width:25%"> <input name="header[key][]" class="form-control js_selectHeaderBtn" placeholder="key" datatype="*" value="{{$header_field.name}}" readonly /> </td>
-                                                <td style="width:40%"> <input name="header[value][]" class="form-control" placeholder="value" datatype="*"  value="{{$header_field.default_value}}" /> </td>
+                                                <td style="width:40%"> <input name="header[value][]" class="form-control" placeholder="value" {{if $header_field.is_required}} datatype="*" {{/if}}  value="{{$header_field.default_value}}" /> </td>
                                                 <td style="width:30%"> <input class="form-control" placeholder="description" readonly value="{{$header_field.intro}}" /> </td>
                                                 <td style="width:5%">
                                                     <a href="javascript:void(0);" class="fa fa-trash-o js_deleteBtn" data-title="删除header参数" data-project_id="3"></a> </td>
@@ -156,7 +156,7 @@
                                             {{foreach $request_fields as $request_field}}
                                             <tr>
                                                 <td style="width:25%"><input name="request[key][]" class="form-control" placeholder="key" datatype="*" readonly value="{{$request_field.name}}"/></td>
-                                                <td style="width:40%"><input name="request[value][]" class="form-control" placeholder="value" datatype="*"  value="{{$request_field.default_value}}"/></td>
+                                                <td style="width:40%"><input name="request[value][]" class="form-control" placeholder="value" {{if $request_field.is_required}} datatype="*" {{/if}}  value="{{$request_field.default_value}}"/></td>
                                                 <td style="width:30%"><input class="form-control" placeholder="description" readonly value="{{$request_field.title}}"/></td>
                                                 <td style="width:5%">
                                                     <a href="javascript:void(0);" class="fa fa-trash-o js_deleteBtn" data-project_id="3"></a>
