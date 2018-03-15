@@ -133,24 +133,8 @@ class mock {
      */
     public function boolean($rule)
     {
-
-        if(!isset($rule)){
-
-            $rule = $this->number('0-1','');
-        }
-
-        if(1 === $rule){
-
-            return 'true';
-
-        }
-
-        if(0 === $rule){
-
-            return 'false';
-
-        }
-
+        $rt=[0=>'false',1=>'true'];
+        return $rt[ mt_rand(0,1)];
     }
 
     /**
